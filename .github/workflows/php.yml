@@ -25,10 +25,13 @@ jobs:
       uses: actions/cache@v2
       with:
         path: vendor
-        php-version: ${{ matrix.php-versions }}
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+            php-version: ${{ matrix.php-versions }}
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
